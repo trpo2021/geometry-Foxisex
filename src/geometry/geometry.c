@@ -3,13 +3,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 //#include "geometry.h"
-
 struct circle {
     float x;
     float y;
     float radius;
 };
+
+float circle_p(struct circle *v)
+{
+    float P = 2 * M_PI * v->radius;
+    return P;
+}
+
+float circle_s(struct circle *v)
+{
+    float S = M_PI * v->radius * v->radius;
+    return S;
+}
 
 float get_prmtr(const char *str, int i, char *cc)
 {
@@ -152,5 +164,9 @@ int main()
     fputs(source_str, stdout);
     checkcircle(source_str, v);
     printf("x = %f, y = %f, r = %f\n", v->x, v->y, v->radius);
+    float P = circle_p(v);
+    printf("%f\n", P);
+    float S = circle_s(v);
+    printf("%f\n", S);
     return 0;
 }
