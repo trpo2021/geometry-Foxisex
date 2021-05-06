@@ -11,27 +11,7 @@ struct circle {
     float radius;
 };
 
-    struct circle *v;
-
-// float get_prmtr(const char *str, int i, struct circle **v, float *z)
-// {
-//     int j = 0;
-//     char s[15] = "";
-//     while ((str[i] != ' ') && (str[i] != ',') && (str[i] != ')')){
-//         s[j] = str[i];
-//         j++;
-//         i++;
-//     }
-//     for(int k = 0; k < strlen(s); k++)
-//         printf("%d\n", s[k]);
-//     char *tmp = &s[i];
-//     float c = strtof(tmp, &tmp);
-//     z = c;
-//     printf("%f\n", z);
-//     return i;
-// }
-
-char *get_prmtr(const char *str, int i, char *cc)
+float get_prmtr(const char *str, int i, char *cc)
 {
     int j = 0;
     char s[15] = "";
@@ -41,16 +21,15 @@ char *get_prmtr(const char *str, int i, char *cc)
         i++;
     }
     strcpy(cc, s);
-    printf("%s\n", cc);
-    return cc;
+    float x = strtof(cc, NULL);
+    return x;
 }
 
 void checkcircle(char* str, struct circle *v)
 {
-    char cx[15] = "";//, cy[15] = "", r[15] = "";
+    char cx[15] = "", cy[15] = "", cr[15] = "";
     char mainstr[] = "circle";
     int i = 0;
-    double y, r;
     printf("\n");
 
     while (str[i] == ' ') {
@@ -79,11 +58,19 @@ void checkcircle(char* str, struct circle *v)
     }
 
     if (isdigit(str[i])) {
-     strcpy(cx, get_prmtr(str, i, cx));
+        char* tmp1 = &str[i];
+        strtod(tmp1, &tmp1);
+        float x = get_prmtr(str, i, cx);
+        v->x = x;
+
+        if (*tmp1 != ' ') {
+            printf("Invalid input: expected space after first coordinate\n");
+            exit(0);
+        }
     }
     
-    float x = strtof(cx, NULL);
-    printf("%f\n", x);
+    
+
 
     while (str[i] != ' ') {
         i++;
@@ -95,8 +82,9 @@ void checkcircle(char* str, struct circle *v)
 
     if (isdigit(str[i])) {
         char* tmp2 = &str[i];
-        y = strtod(tmp2, &tmp2);
-        printf("y = %f\n", y);
+        strtod(tmp2, &tmp2);
+        float y = get_prmtr(str, i, cy);
+        v->y = y;
 
         if ((*tmp2 != ' ') && (*tmp2 != ',')) {
             printf("Invalid input: expected space or \",\" after second "
@@ -125,8 +113,9 @@ void checkcircle(char* str, struct circle *v)
 
     if (isdigit(str[i])) {
         char* tmp3 = &str[i];
-        r = strtod(tmp3, &tmp3);
-        printf("radius = %f\n", r);
+        strtod(tmp3, &tmp3);
+        float r = get_prmtr(str, i, cr);
+        v->radius = r;
 
         if ((*tmp3 != ' ') && (*tmp3 != ')')) {
             printf("Invalid input: expected space or \")\" after radius\n");
@@ -152,7 +141,7 @@ void checkcircle(char* str, struct circle *v)
 
 int main()
 {
-
+    struct circle *v = malloc(sizeof(struct circle));
     int max_size = 40;
     FILE* input;
     input = fopen("bin/input.txt", "r");
@@ -162,6 +151,6 @@ int main()
     fgets(source_str, max_size, input);
     fputs(source_str, stdout);
     checkcircle(source_str, v);
-    // printf("%f, %f, %f\n", x, y, r);
+    printf("x = %f, y = %f, r = %f\n", v->x, v->y, v->radius);
     return 0;
 }
