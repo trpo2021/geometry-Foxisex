@@ -2,7 +2,8 @@
 
 int main()
 {
-    struct circle* v = malloc(sizeof(struct circle));
+    int max_num_of_strings = 10, current_string = 1;
+    int current_circle = 0;
     int max_size = 40;
     int out;
     char source_str[max_size];
@@ -14,8 +15,14 @@ int main()
         printf("No input file\n");
         return 8;
     }
+    struct circle circles[max_num_of_strings];
 
     while (1) {
+        if (current_string > max_num_of_strings) {
+            printf("\nError.9. Entered too many strings\n");
+            return 9;
+        }
+
         estr = fgets(source_str, max_size, input);
         if (estr == NULL) {
             if (feof(input) != 0)
@@ -27,7 +34,7 @@ int main()
         }
         fputs(source_str, stdout);
 
-        if ((out = checkcircle(source_str, v)) != 0) {
+        if ((out = checkcircle(source_str, circles, current_circle)) != 0) {
             switch (out) {
             case 1:
                 printf("Error.1. Invalid input: did you mean \"circle\"?\n");
@@ -57,12 +64,18 @@ int main()
             }
             return out;
         } else {
-            printf("x = %f, y = %f, r = %f\n", v->x, v->y, v->radius);
-            float P = circle_p(v);
-            printf("Perimetr = %f\n", P);
-            float S = circle_s(v);
-            printf("Square = %f\n\n", S);
+            current_circle++;
+            current_string++;
         }
     }
+
+    printf("the data is entered correctly\n");
+    for (int i = 0; i < current_circle; i++)
+        printf("x = %f,y = %f,radius = %f\nPerimetr = %f,Square = %f\n",
+               circles[i].x,
+               circles[i].y,
+               circles[i].radius,
+               circle_p(&circles[i]),
+               circle_s(&circles[i]));
     return 0;
 }

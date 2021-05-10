@@ -26,7 +26,7 @@ float get_prmtr(const char* str, int i, char* cc)
     return x;
 }
 
-int checkcircle(char* str, struct circle* v)
+int checkcircle(char* str, struct circle* v, int cur_circle)
 {
     char cx[15] = "", cy[15] = "", cr[15] = "";
     char mainstr[] = "circle";
@@ -60,7 +60,7 @@ int checkcircle(char* str, struct circle* v)
         char* tmp1 = &str[i];
         strtod(tmp1, &tmp1);
         float x = get_prmtr(str, i, cx);
-        v->x = x;
+        v[cur_circle].x = x;
 
         if (*tmp1 != ' ') {
             return 3;
@@ -79,7 +79,7 @@ int checkcircle(char* str, struct circle* v)
         char* tmp2 = &str[i];
         strtod(tmp2, &tmp2);
         float y = get_prmtr(str, i, cy);
-        v->y = y;
+        v[cur_circle].y = y;
 
         if ((*tmp2 != ' ') && (*tmp2 != ',')) {
             return 4;
@@ -108,7 +108,7 @@ int checkcircle(char* str, struct circle* v)
         char* tmp3 = &str[i];
         strtod(tmp3, &tmp3);
         float r = get_prmtr(str, i, cr);
-        v->radius = r;
+        v[cur_circle].radius = r;
 
         if ((*tmp3 != ' ') && (*tmp3 != ')')) {
             return 6;
@@ -125,9 +125,6 @@ int checkcircle(char* str, struct circle* v)
     i++;
     while (str[i] != '\0') {
         i++;
-    }
-    if (str[i] == '\0') {
-        printf("the data is entered correctly\n");
     }
     return 0;
 }
