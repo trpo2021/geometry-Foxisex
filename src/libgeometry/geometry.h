@@ -13,6 +13,6 @@ struct circle {
 };
 
 float get_prmtr(const char *str, int i, char *cc);
-void checkcircle(char* str, struct circle *v);
+int checkcircle(char* str, struct circle *v);
 float circle_p(struct circle *v);
 float circle_s(struct circle *v);
