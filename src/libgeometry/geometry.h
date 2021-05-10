@@ -12,6 +12,7 @@ struct circle {
     float radius;
 };
 
+void checkforcollisions(struct circle* v, int num_of_circles);
 float get_prmtr(const char* str, int i, char* cc);
 int checkcircle(char* str, struct circle* v, int cur_circle);
 float circle_p(struct circle* v);

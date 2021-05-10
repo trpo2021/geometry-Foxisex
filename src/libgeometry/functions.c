@@ -1,5 +1,22 @@
 #include "geometry.h"
 
+void checkforcollisions(struct circle* v, int num_of_circles)
+{
+    for (int i = 0; i < num_of_circles - 1; i++) {
+        float dbc, dbx, dby; // distance between centres, Xes, Ys
+        float sor;           // sum of radiuses
+        dbx = v[i].x - v[i + 1].x;
+        dby = v[i].y - v[i + 1].y;
+        dbc = sqrt(fabs((dbx * dbx) + (dby * dby)));
+        sor = v[i].radius + v[i + 1].radius;
+        if (dbc <= sor)
+            printf("\nCircles %d and %d have collisions\n", i + 1, i + 2);
+        else
+            printf("\nCircles %d and %d have no collisions\n", i + 1, i + 2);
+        printf("Dist btw centres = %f, sum of radiuses = %f\n", dbc, sor);
+    }
+}
+
 float circle_p(struct circle* v)
 {
     float P = 2 * M_PI * v->radius;
@@ -31,7 +48,6 @@ int checkcircle(char* str, struct circle* v, int cur_circle)
     char cx[15] = "", cy[15] = "", cr[15] = "";
     char mainstr[] = "circle";
     uint i = 0;
-    printf("\n");
 
     while (str[i] == ' ') {
         i++;

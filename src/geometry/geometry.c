@@ -32,7 +32,6 @@ int main()
                 break;
             }
         }
-        fputs(source_str, stdout);
 
         if ((out = checkcircle(source_str, circles, current_circle)) != 0) {
             switch (out) {
@@ -69,13 +68,15 @@ int main()
         }
     }
 
-    printf("the data is entered correctly\n");
+    printf("\nthe data is entered correctly\n\n");
     for (int i = 0; i < current_circle; i++)
-        printf("x = %f,y = %f,radius = %f\nPerimetr = %f,Square = %f\n",
+        printf("%d.x = %f,y = %f,radius = %f\nPerimetr = %f,Square = %f\n",
+               i + 1,
                circles[i].x,
                circles[i].y,
                circles[i].radius,
                circle_p(&circles[i]),
                circle_s(&circles[i]));
+    checkforcollisions(circles, current_circle);
     return 0;
 }
