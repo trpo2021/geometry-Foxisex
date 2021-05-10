@@ -1,22 +1,22 @@
 #include "geometry.h"
 
-float circle_p(struct circle *v)
+float circle_p(struct circle* v)
 {
     float P = 2 * M_PI * v->radius;
     return P;
 }
 
-float circle_s(struct circle *v)
+float circle_s(struct circle* v)
 {
     float S = M_PI * v->radius * v->radius;
     return S;
 }
 
-float get_prmtr(const char *str, int i, char *cc)
+float get_prmtr(const char* str, int i, char* cc)
 {
     int j = 0;
     char s[15] = "";
-    while ((str[i] != ' ') && (str[i] != ',') && (str[i] != ')')){
+    while ((str[i] != ' ') && (str[i] != ',') && (str[i] != ')')) {
         s[j] = str[i];
         j++;
         i++;
@@ -26,7 +26,7 @@ float get_prmtr(const char *str, int i, char *cc)
     return x;
 }
 
-void checkcircle(char* str, struct circle *v)
+int checkcircle(char* str, struct circle* v)
 {
     char cx[15] = "", cy[15] = "", cr[15] = "";
     char mainstr[] = "circle";
@@ -39,8 +39,7 @@ void checkcircle(char* str, struct circle *v)
 
     for (i = 0; i < strlen(mainstr); i++) {
         if (str[i] != mainstr[i]) {
-            printf("Invalid input: did you mean \"circle\"?\n");
-            exit(0);
+            return 1;
         }
     }
 
@@ -49,8 +48,7 @@ void checkcircle(char* str, struct circle *v)
     }
 
     if (str[i] != '(') {
-        printf("Invalid input: expected \"(\"\n");
-        exit(0);
+        return 2;
     }
     i++;
 
@@ -65,8 +63,7 @@ void checkcircle(char* str, struct circle *v)
         v->x = x;
 
         if (*tmp1 != ' ') {
-            printf("Invalid input: expected space after first coordinate\n");
-            exit(0);
+            return 3;
         }
     }
 
@@ -85,9 +82,7 @@ void checkcircle(char* str, struct circle *v)
         v->y = y;
 
         if ((*tmp2 != ' ') && (*tmp2 != ',')) {
-            printf("Invalid input: expected space or \",\" after second "
-                   "coordinate\n");
-            exit(0);
+            return 4;
         }
     }
 
@@ -100,7 +95,7 @@ void checkcircle(char* str, struct circle *v)
     }
 
     if (str[i] != ',') {
-        printf("Invalid input: expected \",\"\n");
+        return 5;
     } else {
         i++;
     }
@@ -116,8 +111,7 @@ void checkcircle(char* str, struct circle *v)
         v->radius = r;
 
         if ((*tmp3 != ' ') && (*tmp3 != ')')) {
-            printf("Invalid input: expected space or \")\" after radius\n");
-            exit(0);
+            return 6;
         }
     }
 
@@ -126,7 +120,7 @@ void checkcircle(char* str, struct circle *v)
     }
 
     if (str[i] != ')') {
-        printf("Invalid input: expected \")\" after radius\n");
+        return 7;
     }
     i++;
     while (str[i] != '\0') {
@@ -135,4 +129,5 @@ void checkcircle(char* str, struct circle *v)
     if (str[i] == '\0') {
         printf("the data is entered correctly\n");
     }
-} 
+    return 0;
+}
