@@ -1,6 +1,6 @@
 #include "geometry.h"
 
-void checkforcollisions(struct circle* v, int num_of_circles)
+void checkforcollisions(struct circle* v, int num_of_circles) //checks pair of adjacent circles
 {
     for (int i = 0; i < num_of_circles - 1; i++) {
         float dbc, dbx, dby; // distance between centres, Xes, Ys
