@@ -29,7 +29,7 @@ float circle_s(struct circle* v)
     return S;
 }
 
-float get_prmtr(const char* str, int i, char* cc)
+float get_prmtr(const char* str, int i, char* var_array)
 {
     int j = 0;
     char s[15] = "";
@@ -38,8 +38,8 @@ float get_prmtr(const char* str, int i, char* cc)
         j++;
         i++;
     }
-    strcpy(cc, s);
-    float x = strtof(cc, NULL);
+    strcpy(var_array, s);
+    float x = strtof(var_array, NULL);
     return x;
 }
 
