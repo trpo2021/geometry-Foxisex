@@ -135,10 +135,10 @@ int checkcircle(char* str, struct circle* v, int cur_circle)
 
     int j = i;
 
-    while(str[j] != ' ' && str[j] != ')' && str[j] != '\0')
+    while (str[j] != ' ' && str[j] != ')' && str[j] != '\0')
         j++;
 
-    if(str[j] == '\0')
+    if (str[j] == '\0')
         return 6;
 
     if (isdigit(str[i])) {
