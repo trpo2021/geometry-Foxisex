@@ -16,7 +16,7 @@ jobs:
         run: make test
 
       - name: Run test
-        run: geometry_test
+        run: /geometry_test
 
       - name: Build application
         run: make
