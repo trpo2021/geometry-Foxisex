@@ -1,9 +1,7 @@
 #include "geometry.h"
 
 void checkforcollisions(
-        struct circle* v,
-        int num_of_circles,
-        int collisions[][num_of_circles]) // checks pair of adjacent circles
+        struct circle* v, int num_of_circles, int collisions[][num_of_circles])
 {
     float dbc, dbx, dby; // distance between centres, Xes, Ys
     float sor;           // sum of radiuses
