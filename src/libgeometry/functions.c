@@ -133,6 +133,14 @@ int checkcircle(char* str, struct circle* v, int cur_circle)
         i++;
     }
 
+    int j = i;
+
+    while(str[j] != ' ' && str[j] != ')' && str[j] != '\0')
+        j++;
+
+    if(str[j] == '\0')
+        return 6;
+
     if (isdigit(str[i])) {
         char* tmp3 = &str[i];
         strtod(tmp3, &tmp3);
