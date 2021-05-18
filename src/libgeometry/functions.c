@@ -20,6 +20,7 @@ void checkforcollisions(
 
             if (dbc <= sor && i != j) {
                 collisions[i][j] = 1;
+                collisions[j][i] = 1;
                 printf("\nCircles %d and %d have collisions\n", i + 1, j + 1);
                 printf("Dist btw centres = %f, sum of radiuses = %f\n",
                        dbc,
