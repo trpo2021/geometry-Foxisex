@@ -68,6 +68,8 @@ int main()
         }
     }
 
+    int collisions[current_circle][current_circle];
+
     printf("\nthe data is entered correctly\n\n");
     for (int i = 0; i < current_circle; i++)
         printf("%d.x = %f,y = %f,radius = %f\nPerimetr = %f,Square = %f\n",
@@ -77,6 +79,6 @@ int main()
                circles[i].radius,
                circle_p(&circles[i]),
                circle_s(&circles[i]));
-    checkforcollisions(circles, current_circle);
+    checkforcollisions(circles, current_circle, collisions);
     return 0;
 }

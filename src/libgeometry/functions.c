@@ -1,19 +1,33 @@
 #include "geometry.h"
 
-void checkforcollisions(struct circle* v, int num_of_circles) //checks pair of adjacent circles
+void checkforcollisions(
+        struct circle* v,
+        int num_of_circles,
+        int collisions[][num_of_circles]) // checks pair of adjacent circles
 {
+    float dbc, dbx, dby; // distance between centres, Xes, Ys
+    float sor;           // sum of radiuses
+
+    for (int i = 0; i < num_of_circles; i++) {
+        for (int j = 0; j < num_of_circles; j++)
+            collisions[i][j] = 0;
+    }
+
     for (int i = 0; i < num_of_circles - 1; i++) {
-        float dbc, dbx, dby; // distance between centres, Xes, Ys
-        float sor;           // sum of radiuses
-        dbx = v[i].x - v[i + 1].x;
-        dby = v[i].y - v[i + 1].y;
-        dbc = sqrt(fabs((dbx * dbx) + (dby * dby)));
-        sor = v[i].radius + v[i + 1].radius;
-        if (dbc <= sor)
-            printf("\nCircles %d and %d have collisions\n", i + 1, i + 2);
-        else
-            printf("\nCircles %d and %d have no collisions\n", i + 1, i + 2);
-        printf("Dist btw centres = %f, sum of radiuses = %f\n", dbc, sor);
+        for (int j = i + 1; j < num_of_circles; j++) {
+            dbx = v[i].x - v[j].x;
+            dby = v[i].y - v[j].y;
+            dbc = sqrt(fabs((dbx * dbx) + (dby * dby)));
+            sor = v[i].radius + v[j].radius;
+
+            if (dbc <= sor && i != j) {
+                collisions[i][j] = 1;
+                printf("\nCircles %d and %d have collisions\n", i + 1, j + 1);
+                printf("Dist btw centres = %f, sum of radiuses = %f\n",
+                       dbc,
+                       sor);
+            }
+        }
     }
 }
 
