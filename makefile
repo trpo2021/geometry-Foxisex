@@ -1,10 +1,10 @@
 APP_NAME = geometry
 LIB_NAME = libgeometry
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0
 CPPFLAGS = -I src -MP -MMD
 LDFLAGS =
-LDLIBS =
+LDLIBS = -lm
 
 BIN_DIR = bin
 OBJ_DIR = obj
