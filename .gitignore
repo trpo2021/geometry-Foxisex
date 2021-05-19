@@ -1,0 +1,8 @@
+*.o
+.main.c.swp
+main.c`
+#main.c#
+.geometry.c.swp
+bin/*
+obj/*
+*/.keep
