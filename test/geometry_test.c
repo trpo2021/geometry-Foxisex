@@ -45,10 +45,10 @@ CTEST(collisions, HaveNoCollisions)
 
 CTEST(P_and_S, perimetr)
 {
-    struct circle* c = malloc(sizeof(struct circle));
-    c->radius = 6.9;
+    struct circle c;
+    c.radius = 6.9;
 
-    float real = circle_p(c);
+    float real = circle_p(&c);
     float exp = 43.353981;
 
     ASSERT_DBL_NEAR(exp, real);
@@ -56,10 +56,10 @@ CTEST(P_and_S, perimetr)
 
 CTEST(P_and_S, square)
 {
-    struct circle* c = malloc(sizeof(struct circle));
-    c->radius = 6.9;
+    struct circle c;
+    c.radius = 6.9;
 
-    float real = circle_s(c);
+    float real = circle_s(&c);
     float exp = 149.571228;
 
     ASSERT_DBL_NEAR(exp, real);
